@@ -1,0 +1,18 @@
+.profile__user-setting {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+
+
+@media screen and (min-width: 1280px) {
+    .profile__user-setting {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+}

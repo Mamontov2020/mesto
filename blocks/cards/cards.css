@@ -1,0 +1,22 @@
+.cards {
+    margin: 40px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+@media screen and (min-width: 1280px) {
+.cards {
+    width: 880px;
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 17px;
+    margin:  0 auto;
+    box-sizing: border-box;
+}
+}

@@ -1,0 +1,14 @@
+.profile__profession {
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0;
+    
+}
+
+@media screen and (min-width: 1280px) {
+.profile__profession {
+    font-weight: 400;
+    font-size: 18px;
+    margin: 0;   
+}
+}

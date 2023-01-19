@@ -1,0 +1,185 @@
+@import url(../vendor/normalize.css);
+@import url(../vendor/fonts/fonts.css);
+@import url(../blocks/container/container.css);
+@import url(../blocks/content/content.css);
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__user-setting/profile__user-setting.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__profession/profile__profession.css);
+@import url(../blocks/profile/__edit-button/profile__edit-button.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/cards/card/__like-button/card__like-button.css);
+@import url(../blocks/cards/card/__picture/card__picture.css);
+@import url(../blocks/cards/card/__title/card__title.css);
+@import url(../blocks/cards/card/__wrapper/card__wrapper.css);
+@import url(../blocks/cards/cards.css);
+@import url(../blocks/cards/card/card.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__container/popup__container.css);
+ 
+/*.container {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(0, 0, 0);
+    max-width: 320px;
+    height: 100%;
+    font-family: 'Inter', Arial, sans-serif;
+    color: #FFFFFF;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+
+}
+
+.content {
+    margin-top: -10px;
+}
+
+.header {
+    min-height: 56px;
+    margin-top: 28px;
+    padding-left: 27px;
+    border-bottom: 1px solid #545454;
+    box-sizing: border-box;
+}
+
+.profile {
+    margin: 0 auto;
+    width: 282px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.profile__avatar {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+}
+
+.profile__name {
+   font-weight: 400;
+   font-size: 28px;
+   margin: 0;
+   margin-bottom: 10px;
+   margin-left: 30px;
+  
+}
+
+.profile__profession {
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0;
+    margin-bottom: 20px;
+    
+}
+
+.profile__wrapper {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   margin-top: 22px;
+     
+     
+ }
+
+.profile__edit-button {
+    width: 18px;
+    height: 18px;
+    background-color: black;
+    background-image: url(../images/edit_button.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid white;
+    margin-left: 12px;
+}
+
+.profile__add-button {
+    background-color: black;
+    background-image: url(../images/add_button.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    min-width: 282px;
+    height: 50px;
+    border: 2px solid white;
+    border-radius: 2px;
+    margin-top: 14px;
+}
+
+.cards {
+    margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.card {
+    min-width: 282px;
+    height: 362px;
+    background-color: white;
+    border-radius: 4%;
+    
+}
+
+.card__title {
+    color: black;
+    font-weight: 900;
+    font-size: 24px;
+}
+
+.card__picture {
+    width: 282px;
+    height: 282px;
+    border-radius: 4% 4% 0 0;
+    
+}
+
+.card__like-button {
+    padding: 0;
+    border: none;
+    width: 22px;
+    height: 19px;
+    background-color: white;
+    background-image: url(../images/like_button.svg);
+    background-repeat: no-repeat;
+}
+
+.card__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0px 20px 0px 20px; 
+}
+
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding-left: 17px;
+    min-width: 282px;
+    height: 62px;
+    margin-bottom: 36px;
+    margin-top: 0;
+}
+.footer__copyright {
+    margin: 0;
+    color: #545454;
+    font-weight: 400;
+    font-size: 14px;
+}
+*/

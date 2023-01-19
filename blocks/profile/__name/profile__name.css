@@ -1,0 +1,15 @@
+.profile__name {
+    font-weight: 500;
+    font-size: 27px;
+    margin: 0;
+    
+}
+
+
+@media screen and (min-width: 1280px) {
+.profile__name {
+    font-weight: 400;
+    font-size: 43px;
+    margin: 0;
+ }
+}

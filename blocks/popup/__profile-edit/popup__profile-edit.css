@@ -1,0 +1,9 @@
+.popups__profile-edit {
+    width: 282px;
+    height: 390px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}

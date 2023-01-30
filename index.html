@@ -18,7 +18,7 @@
                     <div class="profile__info">
                         <header>
                             <h1 class="profile__name">Жак-Ив Кусто</h1>
-                            <button class="profile__edit-button"></button>
+                            <button class="profile__edit"></button>
                         </header>
                         <p class="profile__profession">Исследователь океана</p>
                     </div>
@@ -74,17 +74,18 @@
         <footer class="footer">
             <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
         </footer>
-        <section class="popup">
+        <section class="popup popup__is-opened">
             <div class="popup__container">
-                <button class="popup__profile-close">Закрыть</button>
-                <form class="popup__profile-edit">
-                    <h2 class="popup__profile-title">Редактировать профиль</h2>
-                    <input type="text" value="Жак-Ив Кусто" placeholder="Ваше имя" minlength="2" maxlength="40" required>
-                    <input type="text" value="Исследователь океана" placeholder="Чем занимаетесь?" minlength="2" maxlength="40" required>
-                    <button class="popup__profile-save">Сохранить</button>
+                <button class="popup__close">Закрыть</button>
+                <form class="popup__content">
+                    <h2 class="popup__title">Редактировать профиль</h2>
+                    <input class="popup__text" type="text" value="Жак-Ив Кусто" placeholder="Ваше имя" minlength="2" maxlength="40" required>
+                    <input class="popup__text" type="text" value="Исследователь океана" placeholder="Чем занимаетесь?" minlength="2" maxlength="40" required>
+                    <button class="popup__save">Сохранить</button>
                 </form>
             </div>
         </section>
     </div>
+    <script src="./scripts/index.js"></script>
 </body>
 </html>

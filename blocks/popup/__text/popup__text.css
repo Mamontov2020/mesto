@@ -1,0 +1,15 @@
+.popup__text {
+    border: none;
+    border-bottom: 1px solid black;
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 17px;
+}
+
+@media screen and (min-width: 1280px) {
+    .popup__text {
+        width: 358px;
+    }
+}

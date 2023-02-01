@@ -12,7 +12,7 @@
 @import url(../blocks/profile/__edit/profile__edit.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/profile/__info/profile__info.css);
-@import url(../blocks/profile/__wrap/wrap__profile-name.css);
+@import url(../blocks/profile/__name/__wrap/profile__name-wrap.css);
 @import url(../blocks/cards/card/__like-button/card__like-button.css);
 @import url(../blocks/cards/card/__picture/card__picture.css);
 @import url(../blocks/cards/card/__title/card__title.css);

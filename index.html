@@ -16,10 +16,10 @@
                 <div class="profile__user-setting">
                     <img class="profile__avatar" src="./images/avatar.png" alt="Изображение профиля">
                     <div class="profile__info">
-                        <header>
+                        <div class="wrap__profile-name">
                             <h1 class="profile__name">Жак-Ив Кусто</h1>
-                            <button class="profile__edit"></button>
-                        </header>
+                            <button type="button" class="profile__edit"></button>
+                        </div>
                         <p class="profile__profession">Исследователь океана</p>
                     </div>
 
@@ -74,9 +74,9 @@
         <footer class="footer">
             <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
         </footer>
-        <section class="popup popup__is-opened">
+        <section class="popup">
             <div class="popup__container">
-                <button class="popup__close">Закрыть</button>
+                <button class="popup__close"></button>
                 <form class="popup__content">
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <input class="popup__text" type="text" value="Жак-Ив Кусто" placeholder="Ваше имя" minlength="2" maxlength="40" required>

@@ -6,12 +6,6 @@
     flex-direction: column;
 }
 
-    .profile__info header {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 15px;
-    }
 
 @media screen and (min-width: 1280px) {
     .profile__info {

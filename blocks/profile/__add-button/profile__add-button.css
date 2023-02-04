@@ -19,3 +19,9 @@
         margin-left: 0;
     }
     }
+
+.profile__add-button:hover {
+    cursor: pointer;
+    border: 2px solid gray;
+    background-image: url(../../../images/add_hover.png);
+}

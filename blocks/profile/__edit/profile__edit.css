@@ -16,3 +16,9 @@
 
     }
 }
+
+.profile__edit:hover {
+    background-image: url(../../../images/Edit_hover.png);
+    cursor: pointer;
+    border: 1px solid gray;
+}

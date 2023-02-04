@@ -1,6 +1,6 @@
 .header {
     width: 320px;
-    height: 82px;
+    min-height: 82px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid #545454;
@@ -10,7 +10,7 @@
 @media screen and (min-width: 1280px) {
     .header {
         width: 880px;
-        height: 119px;
+        min-height: 119px;
         margin: 0 auto;
         display: flex;
         justify-content: flex-start;

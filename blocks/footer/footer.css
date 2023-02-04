@@ -5,16 +5,12 @@
     justify-content: flex-start;
     align-items:center;
     width: 282px;
-    height: 98px;
+    min-height: 98px;
 }
 
 @media screen and (min-width: 1280px) {
     .footer {
         width: 880px;
-        height: 144px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
+        min-height: 144px;
     }
 }

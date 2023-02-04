@@ -9,3 +9,8 @@ margin: 0 -19px 10px 0;
 padding: 0;
 border: 0;
 }
+
+.popup__close:hover {
+    background-image: url(../../../images/close_hover.png);
+    cursor: pointer;
+}

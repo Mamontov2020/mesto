@@ -6,7 +6,7 @@
     <title>Mesto</title>
     <link rel="stylesheet" href="./pages/index.css">
 </head>
-<body>
+<body class="body">
     <div class="container">
         <header class="header">
             <img class="header__logo" src="./images/logo.svg" alt="Логотип">
@@ -24,49 +24,49 @@
                     </div>
 
                 </div>
-                <button class="profile__add-button"></button>
+                <button type="button" class="profile__add-button"></button>
             </section>
             <section class="cards">
                 <div class="card">
                     <img class="card__picture" src="./images/karachaevsk.jpg" alt="Картинка">
                     <div class="card__wrapper">
-                        <p class="card__title">Карачаевск</p>
-                        <button class="card__like-button"></button>
+                        <h3 class="card__title">Карачаевск</h3>
+                        <button type="button" class="card__like-button"></button>
                     </div>
                 </div>
                 <div class="card">
                     <img class="card__picture" src="./images/Elbrus.png" alt="Картинка">
                     <div class="card__wrapper">
-                        <p class="card__title">Гора Эльбрус</p>
-                        <button class="card__like-button"></button>
+                        <h3 class="card__title">Гора Эльбрус</h3>
+                        <button type="button" class="card__like-button"></button>
                     </div>
                 </div>
                 <div class="card">
                     <img class="card__picture" src="./images/dombai.png" alt="Картинка">
                     <div class="card__wrapper">
-                        <p class="card__title">Домбай</p>
-                        <button class="card__like-button"></button>
+                        <h3 class="card__title">Домбай</h3>
+                        <button type="button" class="card__like-button"></button>
                     </div>
                 </div>
                 <div class="card">
                     <img class="card__picture" src="./images/Elbrus.png" alt="Картинка">
                     <div class="card__wrapper">
-                        <p class="card__title">Гора Эльбрус</p>
-                        <button class="card__like-button"></button>
+                        <h3 class="card__title">Гора Эльбрус</h3>
+                        <button type="button" class="card__like-button"></button>
                     </div>
                 </div>
                 <div class="card">
                     <img class="card__picture" src="./images/dombai.png" alt="Картинка">
                     <div class="card__wrapper">
-                        <p class="card__title">Домбай</p>
-                        <button class="card__like-button"></button>
+                        <h3 class="card__title">Домбай</h3>
+                        <button type="button" class="card__like-button"></button>
                     </div>
                 </div>
                 <div class="card">
                     <img class="card__picture" src="./images/karachaevsk.jpg" alt="Картинка">
                     <div class="card__wrapper">
-                        <p class="card__title">Карачаевск</p>
-                        <button class="card__like-button"></button>
+                        <h3 class="card__title">Карачаевск</h3>
+                        <button type="button" class="card__like-button"></button>
                     </div>
                 </div>
             </section>
@@ -77,11 +77,11 @@
         <section class="popup">
             <div class="popup__container">
                 <button class="popup__close"></button>
-                <form class="popup__content">
+                <form class="popup__content" name="popup">
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <input class="popup__text" type="text" value="Жак-Ив Кусто" placeholder="Ваше имя" minlength="2" maxlength="40" required>
-                    <input class="popup__text" type="text" value="Исследователь океана" placeholder="Чем занимаетесь?" minlength="2" maxlength="40" required>
-                    <button class="popup__save">Сохранить</button>
+                    <input class="popup__text" id="name" type="text" name="name" value="" placeholder="Ваше имя" minlength="2" maxlength="40" required>
+                    <input class="popup__text" id="profession" type="text" name="profesion" value="" placeholder="Чем занимаетесь?" minlength="2" maxlength="40" required>
+                    <button type="button" class="popup__save">Сохранить</button>
                 </form>
             </div>
         </section>

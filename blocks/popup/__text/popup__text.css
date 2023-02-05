@@ -1,12 +1,13 @@
 .popup__text {
     width: 238px;
     border: none;
-    border-bottom: 1px solid #545454;
+    border-bottom: 1px solid #dbdbdb;
     font-family: 'Inter' , sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
+    
 }
 
 @media screen and (min-width: 1280px) {

@@ -1,6 +1,6 @@
 .popup__close {
  background-color: inherit;
-background-image: url("../../../images/close-popup.png");
+background-image: url("../../../images/close-popup.svg");
 background-repeat: no-repeat;
 background-position: center;
 width: 20px;
@@ -11,6 +11,6 @@ border: 0;
 }
 
 .popup__close:hover {
-    background-image: url(../../../images/close_hover.png);
+    opacity: .5;
     cursor: pointer;
 }

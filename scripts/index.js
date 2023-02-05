@@ -12,11 +12,11 @@ const professionElement = document.querySelector("#profession");
 function openPopup() {
     nameElement.value = profileNameElement.textContent;
     professionElement.value = profileProfessionElement.textContent;
-    popupElement.classList.add("popup__is_opened");
+    popupElement.classList.add("popup__is-opened");
 }
 
 function closePopup() {
-    popupElement.classList.remove("popup__is_opened");
+    popupElement.classList.remove("popup__is-opened");
 }
 
 function savePopup() {

@@ -4,11 +4,11 @@
     width: 22px;
     height: 19px;
     background-color: white;
-    background-image: url(../../../../images/like_button.svg);
+    background-image: url(../../../images/like_button.svg);
     background-repeat: no-repeat;
 }
 
 .card__like-button:hover {
-    background-image: url(../../../images/like_hover.svg);
+    opacity: .5;
     cursor: pointer;
 }

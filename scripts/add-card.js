@@ -1,8 +1,8 @@
 const popupCardElement = document.querySelector(".popup_add_card");
 const popupBtnOpen = document.querySelector(".profile__add-button");
-const popupBtnClose = document.querySelector(".card_close");
-const cardNameElement = document.querySelector(".card_name");
-const cardSrcElement = document.querySelector(".src_card");
+const popupBtnClose = document.querySelector(".card-close");
+const cardNameElement = document.querySelector(".card-name");
+const cardSrcElement = document.querySelector(".src-card");
 const cardElement = document.querySelector("#card-name");
 
 

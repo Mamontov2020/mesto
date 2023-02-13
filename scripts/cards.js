@@ -32,9 +32,9 @@ const cardsList = document.querySelector('.cards');
 const cardFormElement = document.querySelector("#popup__cards");
 const srcElement = document.querySelector("#src-card");
 const cardElement = document.querySelector("#card-name");
-const popupImageZoom = document.querySelector('.popup__zoom');
+const popupImageZoom = document.querySelector('.popup-zoom');
 const popupImageLink = document.querySelector('.popup__zoom-image');
-const popupImageClose = document.querySelector('.zoom__close');
+const popupImageClose = document.querySelector('.zoom-close');
 const popupImageTitle = document.querySelector('.popup__zoom-title');
 
 function insertCard(link, name){

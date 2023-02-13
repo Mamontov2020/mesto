@@ -1,0 +1,8 @@
+.popup__zoom-title {
+    font-weight: normal;
+    font-size: 12px;
+    align-self: flex-start;
+    line-height: 15px;
+    color: #FFFFFF;
+    margin: 10px 0 0;
+}

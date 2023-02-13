@@ -1,3 +1,7 @@
+import "./cards.js";
+import "./add-card.js";
+
+
 const popupElement = document.querySelector(".popup");
 const popupBtnOpen = document.querySelector(".profile__edit");
 const popupBtnClose = document.querySelector(".popup__close");

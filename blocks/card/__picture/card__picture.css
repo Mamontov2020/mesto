@@ -1,6 +1,8 @@
 .card__picture {
+    display: block;
     width: 282px;
     height: 282px;
     border-radius: 4% 4% 0 0;
-    
+    background-color: black;
+    cursor: pointer;
 }

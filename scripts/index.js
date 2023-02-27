@@ -75,7 +75,6 @@ function handleProfileFormSubmit(evt) {
         closePopupEditForm();
 }
 
-
 popupEditFormOpen.addEventListener("click", openPopupEditForm);
 popupEditFormClose.addEventListener("click", closePopupEditForm);
 popupEditForm.addEventListener("submit", handleProfileFormSubmit);
@@ -160,3 +159,29 @@ popupImageClose.addEventListener("click", closePopupImage);
   function closePopup(popup) {
     popup.classList.remove('popup_is-opened');
   };
+
+
+//closeOnEsc
+
+function keyHandler(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_is-opened');
+    if (openedPopup) {
+      closePopup(openedPopup);
+    }
+  }
+};
+document.addEventListener('keydown', keyHandler);
+
+//closeOnOwerlay
+
+const popups = document.querySelectorAll('.popup');
+popups.forEach(popup => {
+  popup.addEventListener("click", (e) => {
+    const isClosest = e.target.closest('.popup__container');
+    if (!isClosest) {
+      closePopup(popup);
+    }
+});
+})
+

@@ -16,7 +16,14 @@
     }
     }
 
-.popup__save:hover {
+.popup__save:hover:enabled {
     cursor: pointer;
     opacity: .8;
+}
+
+.popup__save:disabled,
+.popup__save[disabled]{
+  border: 1px solid #cecece;
+  background-color: #FFFFFF;
+  color: #cecece;
 }

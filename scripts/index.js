@@ -15,6 +15,7 @@ const popupCardAddOpen = document.querySelector(".profile__add-button");
 const popupCardAddClose = document.querySelector(".card-close");
 const cardNameElement = document.querySelector(".card-name");
 const cardSrcElement = document.querySelector(".src-card");
+const cardSaveButton = document.querySelector(".popup_save_card");
 const cardIdNameElement = document.querySelector("#card-name");
 
 //CreateCard
@@ -85,6 +86,7 @@ popupEditForm.addEventListener("submit", handleProfileFormSubmit);
 function openPopupCardAdd() {
     cardIdNameElement.value = cardNameElement.textContent;
     cardSrcElement.value = cardSrcElement.textContent;
+    cardSaveButton.disabled = true;
     openPopup(popupCardAddElement);
 }
 
@@ -152,26 +154,25 @@ popupImageClose.addEventListener("click", closePopupImage);
 
 //Open And Close popup
 
- function openPopup(popup) {
-         popup.classList.add('popup_is-opened');
-  };
+function openPopup(popup) {
+  document.addEventListener('keydown', keyHandler);
+  popup.classList.add('popup_is-opened');
+};
 
-  function closePopup(popup) {
-    popup.classList.remove('popup_is-opened');
-  };
-
+function closePopup(popup) {
+  document.removeEventListener('keydown', keyHandler);
+  popup.classList.remove('popup_is-opened');
+};
 
 //closeOnEsc
 
 function keyHandler(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_is-opened');
-    if (openedPopup) {
-      closePopup(openedPopup);
-    }
+    closePopup(openedPopup);
   }
 };
-document.addEventListener('keydown', keyHandler);
+
 
 //closeOnOwerlay
 

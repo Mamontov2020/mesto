@@ -15,7 +15,7 @@ const popupCardAddOpen = document.querySelector(".profile__add-button");
 const popupCardAddClose = document.querySelector(".card-close");
 const cardNameElement = document.querySelector(".card-name");
 const cardSrcElement = document.querySelector(".src-card");
-const cardSaveButton = document.querySelector(".popup_save_card");
+const cardSaveButton = document.querySelector(".popup__save_card");
 const cardIdNameElement = document.querySelector("#card-name");
 
 //CreateCard

@@ -1,0 +1,7 @@
+.popup_zoom_container {
+    padding: 0;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}

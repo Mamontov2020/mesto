@@ -1,32 +1,12 @@
-const popupImageLink = document.querySelector('.popup__zoom-image');
-const popupImageTitle = document.querySelector('.popup__zoom-title');
-const popupImageZoom = document.querySelector('.popup-zoom');
-
-function closePopup(popup) {
-    document.removeEventListener('keydown', keyHandler);
-    popup.classList.remove('popup_is-opened');
-}
-
-function keyHandler(evt) {
-    if (evt.key === 'Escape') {
-        const openedPopup = document.querySelector('.popup_is-opened');
-        closePopup(openedPopup);
-    }
-}
-
-function openPopup(popup) {
-    document.addEventListener('keydown', keyHandler);
-    popup.classList.add('popup_is-opened');
-}
-
 export class Card {
-    constructor(name, link, cardTemplateSelector) {
+    constructor({ name, link }, cardTemplateSelector, onOpenPopup) {
         this._name = name;
         this._link = link;
         this._cardTemplateSelector = cardTemplateSelector;
+        this._onOpenPopup = onOpenPopup;
     }
 
-    _getTemplate() {
+    _createCard() {
         const cardTemplate = document.querySelector(this._cardTemplateSelector).content;
         const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
 
@@ -38,10 +18,7 @@ export class Card {
     }
 
     _handleImageClick() {
-        popupImageLink.src = this._link;
-        popupImageLink.alt = 'Картинка увеличенная ' + this._name;
-        popupImageTitle.textContent = this._name;
-        openPopup(popupImageZoom);
+        this._onOpenPopup(this._name, this._link);
     }
 
     _handleLikeClick() {
@@ -67,7 +44,7 @@ export class Card {
     }
 
     generateCard() {
-        this._getTemplate();
+        this._createCard();
         this._setEventListeners();
 
         this._imageCardElement.src = this._link;

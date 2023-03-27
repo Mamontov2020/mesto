@@ -11,7 +11,7 @@ export class FormValidator {
         return inputElement.validity.valid;
     }
 
-    _isAllInputsValid () {
+    _isAllInputsValid() {
         return this._inputList.every(this._isInputValid)
     };
 

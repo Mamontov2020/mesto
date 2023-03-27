@@ -1,9 +1,9 @@
 export class Card {
-    constructor({ name, link }, cardTemplateSelector, onOpenPopup) {
+    constructor({ name, link }, cardTemplateSelector, onCardClick) {
         this._name = name;
         this._link = link;
         this._cardTemplateSelector = cardTemplateSelector;
-        this._onOpenPopup = onOpenPopup;
+        this._onCardClick = onCardClick;
     }
 
     _createCard() {
@@ -18,7 +18,7 @@ export class Card {
     }
 
     _handleImageClick() {
-        this._onOpenPopup(this._name, this._link);
+        this._onCardClick(this._name, this._link);
     }
 
     _handleLikeClick() {

@@ -1,9 +1,9 @@
-import { FormValidator } from '../scripts/FormValidator.js';
-import { Card } from '../scripts/Card.js';
-import { Section } from '../scripts/Section.js';
-import { PopupWithForm } from '../scripts/PopupWithForm.js';
-import { PopupWithImage } from '../scripts/PopupWithImage.js';
-import { UserInfo } from '../scripts/UserInfo.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { Card } from '../components/Card.js';
+import { Section } from '../components/Section.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { UserInfo } from '../components/UserInfo.js';
 import './index.css'; // импорт css-стилей для сборки в Webpack
 
 const popupEditFormOpen = document.querySelector('.profile__edit');
@@ -49,6 +49,8 @@ const popupAddCard = new PopupWithForm({
     });
     section.addItem(item);
     popupAddCard.close();
+    const formName = popupAddCard.getFormName();
+    validators[formName].disableSubmitButton();
 });
 
 popupAddCard.setEventListeners();
@@ -68,16 +70,14 @@ const popupEditProfile = new PopupWithForm({
     formSelector: '#popup-edit-form',
     inputSelector: '.popup__text',
 }, (values) => {
-    userInfo.setUserInfo(values.name, values.profesion)
+    userInfo.setUserInfo(values.name, values.profession)
     popupEditProfile.close();
 });
 
 popupEditProfile.setEventListeners();
 popupEditFormOpen.addEventListener('click', () => {
-    popupEditProfile.open({
-        name: userInfo.getUserInfo().name,
-        profesion: userInfo.getUserInfo().profession,
-    });
+    popupEditProfile.setInputValues(userInfo.getUserInfo());
+    popupEditProfile.open();
 });
 
 const popupImage = new PopupWithImage({

@@ -1,40 +1,24 @@
-import { FormValidator } from '../components/FormValidator.js';
-import { Card } from '../components/Card.js';
-import { Section } from '../components/Section.js';
-import { PopupWithForm } from '../components/PopupWithForm.js';
-import { PopupWithImage } from '../components/PopupWithImage.js';
-import { UserInfo } from '../components/UserInfo.js';
-import './index.css'; // импорт css-стилей для сборки в Webpack
+import {FormValidator} from '../components/FormValidator.js';
+import {Card} from '../components/Card.js';
+import {Section} from '../components/Section.js';
+import {PopupWithForm} from '../components/PopupWithForm.js';
+import {PopupWithImage} from '../components/PopupWithImage.js';
+import {UserInfo} from '../components/UserInfo.js';
+import {Api} from '../components/Api.js';
+import {PopupWithConfirmation} from '../components/PopupWithConfirmation.js';
+import './index.css';
+
 
 const popupEditFormOpen = document.querySelector('.profile__edit');
 const popupCardAddOpen = document.querySelector('.profile__add-button');
 
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+const api = new Api({
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-63',
+    headers: {
+        authorization: '687bf872-398c-45ba-a034-a397c8c41022',
+        'Content-Type': 'application/json'
     }
-];
+});
 
 const popupAddCard = new PopupWithForm({
     popupSelector: '.popup_add_card',
@@ -43,25 +27,37 @@ const popupAddCard = new PopupWithForm({
     formSelector: '#popup__cards',
     inputSelector: '.popup__text',
 }, (values) => {
-    const item = renderer({
+    api.createCard({
         name: values['card-name'],
-        link: values['src-card']
-    });
-    section.addItem(item);
-    popupAddCard.close();
-    const formName = popupAddCard.getFormName();
-    validators[formName].disableSubmitButton();
+        link: values['src-card'],
+    }).then((res) => {
+        const item = renderer(res);
+        section.addItem(item);
+        popupAddCard.close();
+        const formName = popupAddCard.getFormName();
+        validators[formName].disableSubmitButton();
+    }).catch(err => console.error(err));
 });
 
 popupAddCard.setEventListeners();
+
 popupCardAddOpen.addEventListener('click', () => {
     popupAddCard.open();
 });
 
 const userInfo = new UserInfo({
     nameSelector: '.profile__name',
-    professionSelector: '.profile__profession'
+    professionSelector: '.profile__profession',
+    avatarSelector: '.profile__avatar-image',
+    avatarButtonSelector: '.profile__avatar-button',
+}, () => {
+    popupAvatar.setInputValues({
+        'src-avatar': userInfo.getUserInfo().avatar,
+    })
+    popupAvatar.open();
 })
+
+userInfo.setEventListeners();
 
 const popupEditProfile = new PopupWithForm({
     popupSelector: '.popup',
@@ -70,11 +66,46 @@ const popupEditProfile = new PopupWithForm({
     formSelector: '#popup-edit-form',
     inputSelector: '.popup__text',
 }, (values) => {
-    userInfo.setUserInfo(values.name, values.profession)
-    popupEditProfile.close();
+    api.updateUserInfo({
+        name: values.name,
+        about: values.profession,
+    })
+        .then((res) => {
+            userInfo.setUserInfo({
+                id: res._id,
+                name: res.name,
+                profession: res.about,
+                avatar: res.avatar,
+            });
+            popupEditProfile.close();
+        })
+        .catch(err => console.error(err));
 });
 
 popupEditProfile.setEventListeners();
+
+const popupAvatar = new PopupWithForm({
+    popupSelector: '.popup_change_avatar',
+    popupCloseButtonSelector: '.popup__close',
+    popupOpenedClass: 'popup_is-opened',
+    formSelector: '#popup-edit-avatar',
+    inputSelector: '.popup__text',
+}, (values) => {
+    api.updateAvatar(values['src-avatar'])
+        .then((res) => {
+            userInfo.setUserInfo({
+                id: res._id,
+                name: res.name,
+                profession: res.about,
+                avatar: res.avatar,
+            });
+            popupAvatar.close();
+        })
+        .catch(err => console.error(err));
+});
+
+popupAvatar.setEventListeners();
+
 popupEditFormOpen.addEventListener('click', () => {
     popupEditProfile.setInputValues(userInfo.getUserInfo());
     popupEditProfile.open();
@@ -90,19 +121,53 @@ const popupImage = new PopupWithImage({
 
 popupImage.setEventListeners();
 
+const popupConfirmation = new PopupWithConfirmation({
+    popupSelector: '.popup_confirmation',
+    popupCloseButtonSelector: '.popup__close',
+    popupOpenedClass: 'popup_is-opened',
+    buttonSelector: '.popup__confirmation',
+});
+
+popupConfirmation.setEventListeners();
+
 const renderer = (item) => {
-    const card = new Card(item, '.card-template', (name, link) => {
-        popupImage.open(name, link);
-    });
+    const card = new Card(
+        item,
+        userInfo.getId(),
+        {cardTemplateSelector: '.card-template'},
+        {
+            onCardClick: (name, link) => {
+                popupImage.open(name, link);
+            },
+            onDeleteClick: () => {
+                popupConfirmation.open(() => {
+                    api.deleteCard(card.getId())
+                        .then(() => {
+                            card.remove();
+                            popupConfirmation.close();
+                        })
+                        .catch(err => console.error(err));
+                });
+            },
+            onLikeClick: () => {
+                if (card.isLiked) {
+                    api.deleteLike(card.getId()).then((res) => {
+                        card.updateCard(res);
+                    }).catch(err => console.error(err));
+                } else {
+                    api.setLike(card.getId()).then((res) => {
+                        card.updateCard(res);
+                    }).catch(err => console.error(err));
+                }
+            }
+        }
+    );
     return card.generateCard();
 };
 
 const section = new Section({
-    items: initialCards,
     renderer: renderer,
 }, '.cards');
-
-section.renderItems();
 
 const config = {
     formSelector: '.popup__content',
@@ -121,3 +186,20 @@ formList.forEach((form) => {
     validators[form.getAttribute('name')] = formValidator;
     formValidator.enableValidation();
 });
+
+Promise.all([
+    api.getUserInfo(),
+    api.getInitialCards()
+])
+    .then(results => {
+        userInfo.setUserInfo(
+            {
+                id: results[0]._id,
+                name: results[0].name,
+                profession: results[0].about,
+                avatar: results[0].avatar
+            }
+        )
+        section.renderItems(results[1]);
+    })
+    .catch(err => console.error(err));

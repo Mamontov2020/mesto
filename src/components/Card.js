@@ -1,9 +1,19 @@
 export class Card {
-    constructor({ name, link }, cardTemplateSelector, onCardClick) {
-        this._name = name;
-        this._link = link;
+    constructor(item, userId, {cardTemplateSelector}, {onCardClick, onDeleteClick, onLikeClick}) {
+        this._userId = userId;
         this._cardTemplateSelector = cardTemplateSelector;
         this._onCardClick = onCardClick;
+        this._onDeleteClick = onDeleteClick;
+        this._onLikeClick = onLikeClick;
+        this._setItemData(item);
+    }
+
+    _setItemData({ _id, name, link, likes, owner }) {
+        this._id = _id;
+        this._name = name;
+        this._link = link;
+        this._likes = likes;
+        this._owner = owner;
     }
 
     _createCard() {
@@ -14,6 +24,7 @@ export class Card {
         this._removeCardElement = cardElement.querySelector('.card__delete');
         this._imageCardElement = cardElement.querySelector('.card__picture');
         this._likeCard = cardElement.querySelector('.card__like-button');
+        this._likeCount = cardElement.querySelector('.card__like-count');
         this._cardTitle = cardElement.querySelector('.card__title');
     }
 
@@ -22,11 +33,11 @@ export class Card {
     }
 
     _handleLikeClick() {
-        this._likeCard.classList.toggle('card__like-button_active');
+        this._onLikeClick();
     }
 
     _handleDeleteClick() {
-        this._element.remove();
+        this._onDeleteClick();
     }
 
     _setEventListeners() {
@@ -43,14 +54,51 @@ export class Card {
         });
     }
 
+    _setContent() {
+        this._imageCardElement.src = this._link;
+        this._imageCardElement.alt = this._name;
+        this._cardTitle.textContent = this._name;
+        this._likeCount.textContent = this._likes.length;
+
+        if (this.isLiked) {
+            this._likeCard.classList.add('card__like-button_active');
+        } else {
+            this._likeCard.classList.remove('card__like-button_active');
+        }
+
+
+        if (!this.isEditable) {
+            this._removeCardElement.remove();
+        }
+    }
+
     generateCard() {
         this._createCard();
         this._setEventListeners();
 
-        this._imageCardElement.src = this._link;
-        this._imageCardElement.alt = this._name;
-        this._cardTitle.textContent = this._name;
+        this._setContent();
 
         return this._element;
+    }
+
+    updateCard(item) {
+        this._setItemData(item);
+        this._setContent();
+    }
+
+    getId() {
+        return this._id;
+    }
+
+    get isEditable() {
+        return this._owner._id === this._userId;
+    }
+
+    get isLiked() {
+        return !!this._likes.find(like => like._id === this._userId)
+    }
+
+    remove() {
+        this._element.remove();
     }
 }

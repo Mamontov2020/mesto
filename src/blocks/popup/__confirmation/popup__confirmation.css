@@ -1,0 +1,29 @@
+.popup__confirmation {
+    width: 238px;
+    height: 46px;
+    background-color: black;
+    color: white;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    border: 0;
+    border-radius: 5px;
+}
+
+@media screen and (min-width: 1280px) {
+    .popup__confirmation {
+        width: 358px;
+        height: 50px;
+    }
+    }
+
+.popup__confirmation:hover:enabled {
+    cursor: pointer;
+    opacity: .8;
+}
+
+.popup__confirmation:disabled,
+.popup__confirmation[disabled]{
+  border: 1px solid #cecece;
+  background-color: #FFFFFF;
+  color: #cecece;
+}

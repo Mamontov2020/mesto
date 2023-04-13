@@ -49,7 +49,6 @@ export class PopupWithForm extends Popup {
 
     close() {
         this._form.reset();
-        this.setLoading(false);
         super.close();
     }
 

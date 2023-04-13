@@ -6,6 +6,19 @@ import {PopupWithImage} from '../components/PopupWithImage.js';
 import {UserInfo} from '../components/UserInfo.js';
 import {Api} from '../components/Api.js';
 import {PopupWithConfirmation} from '../components/PopupWithConfirmation.js';
+import {
+    BASE_URL,
+    TOKEN,
+    CARD_TEMPLATE_SELECTOR,
+    CARDS_SELECTOR,
+    EDIT_AVATAR_CONFIG,
+    EDIT_PROFILE_CONFIG,
+    POPUP_ADD_CARD_CONFIG,
+    POPUP_CONFIRMATION_CONFIG,
+    POPUP_IMAGE_CONFIG,
+    USER_INFO_CONFIG,
+    VALIDATOR_CONFIG
+} from '../utils/constants.js';
 import './index.css';
 
 
@@ -13,59 +26,49 @@ const popupEditFormOpen = document.querySelector('.profile__edit');
 const popupCardAddOpen = document.querySelector('.profile__add-button');
 
 const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-63',
+    baseUrl: BASE_URL,
     headers: {
-        authorization: '687bf872-398c-45ba-a034-a397c8c41022',
+        authorization: TOKEN,
         'Content-Type': 'application/json'
     }
 });
 
-const popupAddCard = new PopupWithForm({
-    popupSelector: '.popup_add_card',
-    popupCloseButtonSelector: '.card-close',
-    popupOpenedClass: 'popup_is-opened',
-    formSelector: '#popup__cards',
-    inputSelector: '.popup__text',
-}, (values) => {
+const popupAddCard = new PopupWithForm(POPUP_ADD_CARD_CONFIG, (values) => {
     api.createCard({
         name: values['card-name'],
         link: values['src-card'],
-    }).then((res) => {
-        const item = renderer(res);
-        section.addItem(item);
-        popupAddCard.close();
-        const formName = popupAddCard.getFormName();
-        validators[formName].disableSubmitButton();
-    }).catch(err => console.error(err));
+    })
+        .then((res) => {
+            const item = renderer(res);
+            section.addItem(item);
+            popupAddCard.close();
+        })
+        .catch(err => console.error(err))
+        .finally(() => {
+            popupAddCard.setLoading(false);
+        });
 });
 
 popupAddCard.setEventListeners();
 
 popupCardAddOpen.addEventListener('click', () => {
     popupAddCard.open();
+    const formName = popupAddCard.getFormName();
+    validators[formName].disableSubmitButton();
 });
 
-const userInfo = new UserInfo({
-    nameSelector: '.profile__name',
-    professionSelector: '.profile__profession',
-    avatarSelector: '.profile__avatar-image',
-    avatarButtonSelector: '.profile__avatar-button',
-}, () => {
+const userInfo = new UserInfo(USER_INFO_CONFIG, () => {
     popupAvatar.setInputValues({
         'src-avatar': userInfo.getUserInfo().avatar,
     })
+    const formName = popupAvatar.getFormName();
+    validators[formName].disableSubmitButton();
     popupAvatar.open();
 })
 
 userInfo.setEventListeners();
 
-const popupEditProfile = new PopupWithForm({
-    popupSelector: '.popup',
-    popupCloseButtonSelector: '.popup__close',
-    popupOpenedClass: 'popup_is-opened',
-    formSelector: '#popup-edit-form',
-    inputSelector: '.popup__text',
-}, (values) => {
+const popupEditProfile = new PopupWithForm(EDIT_PROFILE_CONFIG, (values) => {
     api.updateUserInfo({
         name: values.name,
         about: values.profession,
@@ -79,18 +82,15 @@ const popupEditProfile = new PopupWithForm({
             });
             popupEditProfile.close();
         })
-        .catch(err => console.error(err));
+        .catch(err => console.error(err))
+        .finally(() => {
+            popupEditProfile.setLoading(false);
+        });
 });
 
 popupEditProfile.setEventListeners();
 
-const popupAvatar = new PopupWithForm({
-    popupSelector: '.popup_change_avatar',
-    popupCloseButtonSelector: '.popup__close',
-    popupOpenedClass: 'popup_is-opened',
-    formSelector: '#popup-edit-avatar',
-    inputSelector: '.popup__text',
-}, (values) => {
+const popupAvatar = new PopupWithForm(EDIT_AVATAR_CONFIG, (values) => {
     api.updateAvatar(values['src-avatar'])
         .then((res) => {
             userInfo.setUserInfo({
@@ -101,32 +101,26 @@ const popupAvatar = new PopupWithForm({
             });
             popupAvatar.close();
         })
-        .catch(err => console.error(err));
+        .catch(err => console.error(err))
+        .finally(() => {
+            popupAvatar.setLoading(false);
+        });
 });
 
 popupAvatar.setEventListeners();
 
 popupEditFormOpen.addEventListener('click', () => {
     popupEditProfile.setInputValues(userInfo.getUserInfo());
+    const formName = popupEditProfile.getFormName();
+    validators[formName].disableSubmitButton();
     popupEditProfile.open();
 });
 
-const popupImage = new PopupWithImage({
-    popupSelector: '.popup-zoom',
-    popupCloseButtonSelector: '.popup__close',
-    popupOpenedClass: 'popup_is-opened',
-    imageSelector: '.popup__zoom-image',
-    titleSelector: '.popup__zoom-title'
-});
+const popupImage = new PopupWithImage(POPUP_IMAGE_CONFIG);
 
 popupImage.setEventListeners();
 
-const popupConfirmation = new PopupWithConfirmation({
-    popupSelector: '.popup_confirmation',
-    popupCloseButtonSelector: '.popup__close',
-    popupOpenedClass: 'popup_is-opened',
-    buttonSelector: '.popup__confirmation',
-});
+const popupConfirmation = new PopupWithConfirmation(POPUP_CONFIRMATION_CONFIG);
 
 popupConfirmation.setEventListeners();
 
@@ -134,7 +128,7 @@ const renderer = (item) => {
     const card = new Card(
         item,
         userInfo.getId(),
-        {cardTemplateSelector: '.card-template'},
+        {cardTemplateSelector: CARD_TEMPLATE_SELECTOR},
         {
             onCardClick: (name, link) => {
                 popupImage.open(name, link);
@@ -167,22 +161,13 @@ const renderer = (item) => {
 
 const section = new Section({
     renderer: renderer,
-}, '.cards');
-
-const config = {
-    formSelector: '.popup__content',
-    inputSelector: '.popup__text',
-    submitButtonSelector: '.form__submit',
-    inactiveButtonClass: '.popup__button_disabled',
-    inputErrorClass: 'form__input_type_error',
-    errorClass: 'form__input-error_active'
-}
+}, CARDS_SELECTOR);
 
 const validators = {};
 
-const formList = Array.from(document.querySelectorAll(config.formSelector));
+const formList = Array.from(document.querySelectorAll(VALIDATOR_CONFIG.formSelector));
 formList.forEach((form) => {
-    const formValidator = new FormValidator(config, form);
+    const formValidator = new FormValidator(VALIDATOR_CONFIG, form);
     validators[form.getAttribute('name')] = formValidator;
     formValidator.enableValidation();
 });
